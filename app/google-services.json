@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1067318628198",
+    "firebase_url": "https://firy-9f2b8.firebaseio.com",
+    "project_id": "firy-9f2b8",
+    "storage_bucket": "firy-9f2b8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1067318628198:android:28b1843b36bd648c93c2a7",
+        "android_client_info": {
+          "package_name": "com.example.firy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1067318628198-bkci7vqo17hnho0qhvqbd3q64nk8jksa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC-Uru1Gnugd4dXkdIfhivrt8y_G1pq_k4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1067318628198-bkci7vqo17hnho0qhvqbd3q64nk8jksa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

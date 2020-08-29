@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="?android:attr/fullDark"/>
+
+    <item
+        android:left="200dp"
+        android:right="200dp">
+
+        <bitmap android:src="@drawable/ic_splash"
+            android:gravity="center"/>
+    </item>
+
+</layer-list>
