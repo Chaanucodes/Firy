@@ -9,6 +9,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.example.firy.databinding.ActivitySignInBinding
+import com.example.firy.util.FirestoreUtil
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
@@ -67,8 +68,11 @@ class SignInActivity : AppCompatActivity() {
             val response = IdpResponse.fromResultIntent(data)
             if (resultCode == Activity.RESULT_OK){
                 val progressDialog = indeterminateProgressDialog("Setting up your account")
-                startActivity(intentFor<MainActivity>().newTask().clearTask())
-                progressDialog.dismiss()
+                FirestoreUtil.initCurrentUserIfFirstTime {
+                    startActivity(intentFor<MainActivity>().newTask().clearTask())
+                    progressDialog.dismiss()
+                }
+
             } else if(resultCode == Activity.RESULT_CANCELED){
                 if (response == null) return
 

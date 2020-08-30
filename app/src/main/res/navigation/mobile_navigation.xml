@@ -3,23 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
-
+    app:startDestination="@id/conversation_fragment">
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.firy.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/my_account_fragment"
+        android:name="com.example.firy.fragmentas.MyAccountFragment"
+        android:label="MyAccountFragment"
+        tools:layout="@layout/fragment_my_account"/>
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.firy.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
-    <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.firy.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/conversation_fragment"
+        android:name="com.example.firy.fragmentas.ConversationFragment"
+        android:label="fragment_conversation"
+        tools:layout="@layout/fragment_conversation" />
 </navigation>

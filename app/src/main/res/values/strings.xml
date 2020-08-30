@@ -6,4 +6,12 @@
     <string name="conversations">Conversations</string>
     <string name="my_account">My account</string>
     <string name="log_in">Log in</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Save</string>
+    <string name="sign_out">Sign out</string>
+    <string name="my_name">My name</string>
+    <string name="my_bio">My Bio</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="how_to_change_dp">Click below to change profile picture</string>
 </resources>

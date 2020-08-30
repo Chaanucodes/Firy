@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
+        android:id="@+id/conversation_fragment"
         android:icon="@drawable/ic_conversations_nav"
         android:title="@string/conversations" />
 
     <item
-        android:id="@+id/navigation_dashboard"
+        android:id="@+id/my_account_fragment"
         android:icon="@drawable/ic_my_acc_nav"
         android:title="@string/my_account" />
 
