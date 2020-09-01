@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.fragment.findNavController
 import com.example.firy.R
 import com.example.firy.SignInActivity
 import com.example.firy.databinding.FragmentMyAccountBinding
@@ -67,6 +70,7 @@ class MyAccountFragment : Fragment() {
                         )
                     }
                 }
+                Toast.makeText(activity, "Changes Saved", Toast.LENGTH_SHORT).show()
             }
             buttonSignOut.setOnClickListener {
                 AuthUI.getInstance()
@@ -103,6 +107,7 @@ class MyAccountFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+
         FirestoreUtil.getCurrentUser {
             if (this.isVisible){
                 editTextName.setText(it?.name)
@@ -114,6 +119,11 @@ class MyAccountFragment : Fragment() {
                         .into(imageViewProfilePicture)
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity).supportActionBar?.title = "SPLASH (beta)"
     }
 
 }

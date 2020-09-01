@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="16dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/colorPrimaryDark">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="4dp">
+
+        <ImageView
+            android:id="@+id/imageViewConvoProfilePic"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="16dp"
+            android:layout_centerVertical="true"
+            tools:src="@drawable/ic_my_acc_nav"/>
+
+        <TextView
+            android:id="@+id/textViewConvoName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@id/imageViewConvoProfilePic"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            tools:text="Full name"/>
+
+        <TextView
+            android:id="@+id/textViewConvoBio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textViewConvoName"
+            android:layout_alignStart="@id/textViewConvoName"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            tools:text="Full bio"/>
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
+</layout>
