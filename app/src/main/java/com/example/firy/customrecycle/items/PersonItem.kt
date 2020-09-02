@@ -21,6 +21,7 @@ data class PersonItem(
         if(person.profilePicturePath!=null){
             GlideApp.with(context)
                 .load(StorageUtil.pathToReference(person.profilePicturePath))
+                .circleCrop()
                 .placeholder(R.drawable.ic_my_acc_nav)
                 .into(viewHolder.imageViewConvoProfilePic)
         }
