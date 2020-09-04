@@ -2,6 +2,7 @@ package com.example.firy.util
 
 import android.content.Context
 import android.util.Log
+import com.example.firy.customrecycle.ImageMessageItem
 import com.example.firy.customrecycle.TextMessageItem
 import com.example.firy.customrecycle.items.PersonItem
 import com.example.firy.model.*
@@ -116,7 +117,7 @@ object FirestoreUtil {
                     if (it["type"] == MessageType.TEXT){
                         items.add(TextMessageItem(it.toObject(TextMessage::class.java)!!, context))
                     }else{
-                        //TODO: Image message
+                        items.add(ImageMessageItem(it.toObject(ImageMessage::class.java)!!, context))
                     }
 
                     onListen(items)
