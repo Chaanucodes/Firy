@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         window.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
+        window.navigationBarColor = resources.getColor(R.color.colorAccent)
 
 
         val navController = findNavController(R.id.nav_host_fragment)

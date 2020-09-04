@@ -62,13 +62,12 @@ class MyAccountFragment : Fragment() {
                         )
                     }
                 } else {
-                    StorageUtil.uploadProfilePhoto(selectedImageBytes) {
                         FirestoreUtil.updateCurrentUser(
                             editTextName.text.toString(),
                             editTextBio.text.toString(),
                             null
                         )
-                    }
+
                 }
                 Toast.makeText(activity, "Changes Saved", Toast.LENGTH_SHORT).show()
             }
