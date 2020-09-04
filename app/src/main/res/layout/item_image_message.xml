@@ -6,26 +6,28 @@
     android:layout_margin="8dp">
 
     <RelativeLayout
-        android:id="@id/message_root"
+        android:id="@+id/image_root"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp"
         android:background="@drawable/rect_round_primary_dark">
 
         <ImageView
             android:id="@+id/imageViewImageItem"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:scaleType="fitCenter"
             android:adjustViewBounds="true"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:src="@drawable/splash_screen_bg"/>
 
         <TextView
-            android:id="@id/textViewMessageTimeItem"
+            android:id="@+id/textViewImageTimeItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imageViewImageItem"

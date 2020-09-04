@@ -10,16 +10,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
+        android:padding="8dp"
         android:background="@drawable/rect_round_primary_dark">
+
         <TextView
             android:id="@+id/textViewMessageItem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxWidth="250dp"
             android:minWidth="120dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp"
-            android:paddingTop="4dp"
+            android:textColor="?android:attr/textColorPrimary"
             android:textAppearance="?android:attr/textAppearanceMedium"
             tools:text="@string/experiment_text"/>
 

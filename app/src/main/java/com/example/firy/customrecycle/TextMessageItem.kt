@@ -4,12 +4,12 @@ import android.content.Context
 import android.view.Gravity
 import android.widget.FrameLayout
 import com.example.firy.R
-import com.example.firy.customrecycle.items.MessageItem
 import com.example.firy.model.TextMessage
 import com.google.firebase.auth.FirebaseAuth
 import com.xwray.groupie.kotlinandroidextensions.GroupieViewHolder
 import com.xwray.groupie.kotlinandroidextensions.Item
 import kotlinx.android.synthetic.main.item_text_message.*
+import org.jetbrains.anko.backgroundResource
 import org.jetbrains.anko.wrapContent
 import java.text.SimpleDateFormat
 
