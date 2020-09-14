@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.firy.model.ImageMessage
 import com.example.firy.model.MessageType
 import com.example.firy.model.TextMessage
+import com.example.firy.model.User
 import com.example.firy.util.FirestoreUtil
 import com.example.firy.util.StorageUtil
 import com.google.firebase.auth.FirebaseAuth
@@ -29,6 +30,9 @@ const val CHAT_INTENT_FOR_IMAGE = 2
 class ChatActivity : AppCompatActivity() {
 
     private lateinit var currentChannelId : String
+    private lateinit var currentUser : User
+    private lateinit var otherUserId : String
+
     private lateinit var messageListenerRegistration: ListenerRegistration
     private var shouldInitRecyclerView = true
     private lateinit var messagesSection: Section
@@ -40,14 +44,18 @@ class ChatActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = intent.getStringExtra(AppConstants.USER_NAME)
 
-        val otherUserId = intent.getStringExtra(AppConstants.USER_ID)
+        FirestoreUtil.getCurrentUser {
+            currentUser = it!!
+        }
+
+        otherUserId = intent.getStringExtra(AppConstants.USER_ID)!!
 
         FirestoreUtil.getOrCreateChatChannel(otherUserId!!){channelId ->
             currentChannelId = channelId
             messageListenerRegistration = FirestoreUtil.addChatMessagesListener(channelId, this, this::updateRecyclerView)
             sendMessageButton.setOnClickListener {
                 val messageToSend = TextMessage(editTextMessage.text.toString(), Calendar.getInstance().time,
-                FirebaseAuth.getInstance().currentUser!!.uid, MessageType.TEXT)
+                FirebaseAuth.getInstance().currentUser!!.uid, MessageType.TEXT, otherUserId, currentUser.name)
                 editTextMessage.setText(" ")
                 FirestoreUtil.sendMessage(messageToSend, channelId)
             }
@@ -75,7 +83,8 @@ class ChatActivity : AppCompatActivity() {
             val selectedImageBytes = outputStream.toByteArray()
 
             StorageUtil.uploadMessageImage(selectedImageBytes){
-                val messageToSend = ImageMessage(it , Calendar.getInstance().time, FirebaseAuth.getInstance().currentUser!!.uid)
+                val messageToSend = ImageMessage(it , Calendar.getInstance().time, FirebaseAuth.getInstance().currentUser!!.uid, MessageType.IMAGE,
+                    otherUserId, currentUser.name)
                 FirestoreUtil.sendMessage(messageToSend, currentChannelId )
             }
         }

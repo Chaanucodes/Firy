@@ -15,4 +15,6 @@
     <string name="profile_picture">Profile picture</string>
     <string name="how_to_change_dp">Click below to change profile picture</string>
     <string name="experiment_text">A large piece of text for experiment. Just to see how the layout looks with so many words in it. The text is being stretched to live up to the expectations of the experiment. Do not even read this btw. Not really important.</string>
+    <string name="chat_hint">Splash your message here</string>
+    <string name="default_notification_channel_id">splash_channel</string>
 </resources>

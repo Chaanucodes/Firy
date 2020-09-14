@@ -6,7 +6,9 @@ data class ImageMessage (
     val imagePath: String,
     override val time: Date,
     override val senderId: String,
-    override val type: String = MessageType.IMAGE
+    override val type: String = MessageType.IMAGE,
+    override val recipient: String,
+    override val senderName: String
 ) : Message{
-    constructor() : this("", Date(0), "")
+    constructor() : this("", Date(0), "","","","")
 }

@@ -48,7 +48,8 @@
                 android:id="@+id/editTextMessage"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="Splash your message here" />
+                android:maxLines="4"
+                android:hint="@string/chat_hint" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView

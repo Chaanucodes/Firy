@@ -6,21 +6,27 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.databinding.DataBindingUtil
 import com.example.firy.databinding.ActivitySignInBinding
+import com.example.firy.service.MyFirebaseMessagingService
 import com.example.firy.util.FirestoreUtil
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.ErrorCodes
 import com.firebase.ui.auth.IdpResponse
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.iid.FirebaseInstanceId
+import com.google.firebase.messaging.FirebaseMessagingService
 import org.jetbrains.anko.*
 import org.jetbrains.anko.design.longSnackbar
 
 class SignInActivity : AppCompatActivity() {
 
     private val SIGNTENT_CODE = 1
-    private lateinit var binding : ActivitySignInBinding
+    private lateinit var binding: ActivitySignInBinding
     private val signInProviders = listOf(
         AuthUI.IdpConfig.EmailBuilder()
             .setAllowNewAccounts(true)
@@ -40,11 +46,11 @@ class SignInActivity : AppCompatActivity() {
                 .setAvailableProviders(signInProviders)
                 .setLogo(R.drawable.ic_splash)
                 .build()
-            startActivityForResult(intent,SIGNTENT_CODE)
+            startActivityForResult(intent, SIGNTENT_CODE)
         }
     }
 
-    private fun animateLayout(){
+    private fun animateLayout() {
         val colorFrom = resources.getColor(R.color.colorAccent)
         val colorTo = resources.getColor(R.color.colorPrimaryDark)
         val colorLast = resources.getColor(R.color.colorPrimary)
@@ -54,9 +60,8 @@ class SignInActivity : AppCompatActivity() {
         colorAnimation.repeatCount = ValueAnimator.INFINITE
         colorAnimation.repeatMode = ValueAnimator.REVERSE
 
-        colorAnimation.addUpdateListener {
-                animator ->
-        binding.signInActivityLayout.setBackgroundColor(animator.animatedValue as Int)
+        colorAnimation.addUpdateListener { animator ->
+            binding.signInActivityLayout.setBackgroundColor(animator.animatedValue as Int)
         }
         colorAnimation.start()
     }
@@ -64,23 +69,45 @@ class SignInActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == SIGNTENT_CODE){
+        if (requestCode == SIGNTENT_CODE) {
             val response = IdpResponse.fromResultIntent(data)
-            if (resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK) {
                 val progressDialog = indeterminateProgressDialog("Setting up your account")
                 FirestoreUtil.initCurrentUserIfFirstTime {
                     startActivity(intentFor<MainActivity>().newTask().clearTask())
+                    FirebaseInstanceId.getInstance().instanceId
+                        .addOnCompleteListener(OnCompleteListener { task ->
+                            if (!task.isSuccessful) {
+                                Log.w("THE+LOG_TAG", "getInstanceId failed", task.exception)
+                                return@OnCompleteListener
+                            }
+                            // Get new Instance ID token
+                            val token = task.result?.token
+                            // Log and toast
+                            Log.d("THELOGTAG", "TOKEN RECEIVED")
+                            MyFirebaseMessagingService.addTokenToFirestore(token)
+                        }
+                        )
+
                     progressDialog.dismiss()
                 }
 
-            } else if(resultCode == Activity.RESULT_CANCELED){
+            } else if (resultCode == Activity.RESULT_CANCELED) {
                 if (response == null) return
 
-                when(response.error?.errorCode){
+                when (response.error?.errorCode) {
                     ErrorCodes.NO_NETWORK ->
-                        Snackbar.make(binding.signInActivityLayout, "NO NETWORK", Snackbar.LENGTH_LONG)
+                        Snackbar.make(
+                            binding.signInActivityLayout,
+                            "NO NETWORK",
+                            Snackbar.LENGTH_LONG
+                        )
                     ErrorCodes.UNKNOWN_ERROR ->
-                        Snackbar.make(binding.signInActivityLayout, "UNKNOWN ERROR", Snackbar.LENGTH_LONG)
+                        Snackbar.make(
+                            binding.signInActivityLayout,
+                            "UNKNOWN ERROR",
+                            Snackbar.LENGTH_LONG
+                        )
                 }
             }
         }
